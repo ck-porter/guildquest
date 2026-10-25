@@ -1,23 +1,24 @@
 package com.guildquest;
 
 import com.guildquest.model.Adventurer;
+import com.guildquest.service.AdventurerService;
 
 public class Main {
     public static void main(String[] args){
 
-        Adventurer adventurer = new Adventurer(12, "Max");
-        adventurer.addGold(50);
-        adventurer.takeDamage(30);
-        adventurer.heal(10);
+        System.out.println("Hello");
+        AdventurerService service = new AdventurerService();
 
-        System.out.println(adventurer);
+        Adventurer max = new Adventurer(1, "Max");
+        Adventurer aria = new Adventurer(2, "Aria");
 
-        adventurer.takeDamage(200);
-        System.out.println(adventurer);
+        service.registerAdventurer(max);
+        service.registerAdventurer(aria);
 
-        adventurer.heal(500);
-        System.out.println(adventurer
-        );
+        Adventurer result = service.findAdventurerById(1);
+        System.out.println("hi");
+
+        System.out.println(result.getName()); // Max
 
     }
 }
