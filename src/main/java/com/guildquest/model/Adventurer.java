@@ -1,7 +1,5 @@
 package com.guildquest.model;
 
-import java.util.Formatter;
-
 public class Adventurer {
     private int id;
     private String name;
@@ -13,7 +11,7 @@ public class Adventurer {
 
     public Adventurer(int id, String name){
         if(id <= 0){
-            throw new IllegalArgumentException("Play ID cannot be negative");
+            throw new IllegalArgumentException("Player ID cannot be negative");
         }else{
             this.id = id;
         }
@@ -56,38 +54,33 @@ public class Adventurer {
     }
 
     public int getMaxHealth(){
-        return id;
+        return maxHealth;
     }
 
-    public int addGold(int amount){
+    public void addGold(int amount){
         if(amount < 0){
-            return 0;
+            throw new IllegalArgumentException("The amount of gold cannot be a negative number");
         }else if(amount > Integer.MAX_VALUE - this.gold){
-            return Integer.MAX_VALUE;
+            throw new IllegalArgumentException("You cannot have more than Int max gold");
         } else {
             this.gold += amount;
-            return gold;
         }
     }
 
-    public int takeDamage(int damage){
-        if(damage < 0){
-            return 0;
-        }else if(this.health - damage < 0 || this.health == 0){
-            return 0;
-        }else{
-            return this.health - damage;
+    public void takeDamage(int damage){
+        if(damage < 0) {
+            throw new IllegalArgumentException("The amount of damage cannot be a negative number");
         }
+
+        this.health = Math.max(this.health - damage, 0);
     }
 
-    public int heal(int amount){
-        if(amount > 0){
-            return 0;
-        }else if(this.health + amount > maxHealth){
-            return maxHealth;
-        }else{
-            return this.health + amount;
+    public void heal(int amount){
+        if(amount < 0){
+            throw new IllegalArgumentException("The amount of healing cannot be a negative number");
         }
+
+        this.health = Math.min(this.health + amount, this.maxHealth);
     }
 
     @Override
