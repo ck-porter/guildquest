@@ -1,7 +1,6 @@
 package com.guildquest.repository;
 
 import com.guildquest.model.Adventurer;
-import com.guildquest.service.AdventurerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
