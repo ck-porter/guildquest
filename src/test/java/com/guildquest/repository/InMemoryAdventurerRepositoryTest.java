@@ -28,11 +28,13 @@ public class InMemoryAdventurerRepositoryTest {
 
     @Test
     public void findUnknownIdReturnsNull(){
+
         assertNull(repository.findById(13));
     }
 
     @Test
     public void existsByIdReturnsTrue(){
+
         assertTrue(repository.existsById(1));
     }
 
