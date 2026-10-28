@@ -1,24 +1,17 @@
 package com.guildquest;
 
 import com.guildquest.model.Adventurer;
+import com.guildquest.repository.InMemoryAdventurerRepository;
 import com.guildquest.service.AdventurerService;
 
 public class Main {
     public static void main(String[] args){
 
-        System.out.println("Hello");
-        AdventurerService service = new AdventurerService();
+        InMemoryAdventurerRepository repository = new InMemoryAdventurerRepository();
+        AdventurerService service = new AdventurerService(repository);
+        Adventurer adventurer = new Adventurer(1, "Max");
 
-        Adventurer max = new Adventurer(1, "Max");
-        Adventurer aria = new Adventurer(2, "Aria");
-
-        service.registerAdventurer(max);
-        service.registerAdventurer(aria);
-
-        Adventurer result = service.findAdventurerById(1);
-        System.out.println("hi");
-
-        System.out.println(result.getName()); // Max
-
+        service.registerAdventurer(adventurer);
+        System.out.println(service.findAdventurerById(1));
     }
 }

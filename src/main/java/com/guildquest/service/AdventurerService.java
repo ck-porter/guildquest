@@ -1,29 +1,33 @@
 package com.guildquest.service;
 
 import com.guildquest.model.Adventurer;
+import com.guildquest.repository.AdventurerRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AdventurerService {
 
-    private Map<Integer, Adventurer> adventurers;
+    private final AdventurerRepository repository;
 
-    public AdventurerService(){
-        this.adventurers = new HashMap<>();
+    public AdventurerService(AdventurerRepository repository){
+
+        this.repository = repository;
     }
 
     public void registerAdventurer(Adventurer adventurer){
         if(adventurer == null){
             throw new IllegalArgumentException("Adventurer cannot be null");
-        }else if(adventurers.containsKey(adventurer.getId())){
+        }
+
+        if(repository.existsById(adventurer.getId())){
             throw new IllegalArgumentException("Adventurer ID must be unique.");
         }
 
-        adventurers.put(adventurer.getId(), adventurer);
+        repository.save(adventurer);
     }
 
     public Adventurer findAdventurerById(int id){
-        return adventurers.get(id);
+        return repository.findById(id);
     }
 }
