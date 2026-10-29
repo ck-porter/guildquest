@@ -11,17 +11,16 @@ public class Adventurer {
 
     public Adventurer(int id, String name){
         if(id <= 0){
-            throw new IllegalArgumentException("Player ID cannot be negative");
-        }else{
-            this.id = id;
+            throw new IllegalArgumentException("Player ID must be greater than 0.");
         }
+
+        this.id = id;
 
         if(name == null || name.trim().isEmpty()){
             throw new IllegalArgumentException("Name cannot be null or blank.");
-        }else{
-            this.name = name;
         }
 
+        this.name = name;
         this.level = 1;
         this.experience = 0;
         this.gold = 0;
